@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>ICT - Library Management System</title>
+</head>
+<body>
+
+<section>
+
+    <div class="container">
+        <h1 style="text-align: center">Student List</h1>
+        <p style="text-align: center; color: darkcyan" th:text="${message}"></p>
+        <div class="row row-cols-3">
+            <div th:if="${studentDTOS.isEmpty()}">
+                <td colspan="3"> No records</td>
+            </div>
+            <div th:each="studentDTO : ${studentDTOS}">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img th:src="@{${'/student/image/' + studentDTO.image}}" class="img-fluid rounded-start"
+                                 alt="Not Available Image">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${'ID: ' + studentDTO.studentId}">Card title</h5>
+                                <h6 class="card-title" th:text="${'Name: ' + studentDTO.name}"></h6>
+                                <p class="card-text" th:text="${'Contact: ' + studentDTO.session}"></p>
+                                <p class="card-text" th:text="${'Contact: ' + studentDTO.contact}"></p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <a th:href="@{${'/student/get/' + studentDTO.id}}" class="btn btn-success">Details</a>
+                            <a th:href="@{${'/borrow/student/' + studentDTO.id}}" class="btn btn-success">Add Books</a>
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+    </div>
+</section>
+
+</body>
+</html>

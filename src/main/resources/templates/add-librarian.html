@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>ICT - Library Management System</title>
+</head>
+<body>
+
+<section>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-6 container justify-content-center card">
+                <h1 class="text-center"> Add New Librarian </h1>
+                <div class="card-body">
+
+                    <!--librarian form started....-->
+                    <form th:action="@{/librarian/save}" th:object="${librarianDTO}" method="post"
+                          enctype="multipart/form-data" onsubmit="return librarianFormValidator()">
+
+                        <!--librarian name div....-->
+                        <div class="mb-3">
+                            <label for="librarianName" class="form-label">Librarian's Name</label>
+                            <input
+                                    type="text"
+                                    id="librarianName"
+                                    name="name"
+                                    th:field="*{name}"
+                                    th:value="${librarianDTO.name}"
+                                    th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackLibrarianName"
+                            >
+                            <div
+                                    th:each="e : ${#fields.errors('name')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackLibrarianName"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--librarian email div....-->
+                        <div class="mb-3">
+                            <label for="librarianEmail" class="form-label">Librarian's Email</label>
+                            <input
+                                    type="email"
+                                    id="librarianEmail"
+                                    name="author"
+                                    th:field="*{email}"
+                                    th:value="${librarianDTO.email}"
+                                    th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackLibrarianEmail"
+                            >
+                            <span id="emailMessage" style="color: red"></span>
+                            <div
+                                    th:each="e : ${#fields.errors('email')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackLibrarianEmail"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--librarian contact number div....-->
+                        <div class="mb-3">
+                            <label for="librarianContact" class="form-label">Librarian Contact Number</label>
+                            <input
+                                    type="text"
+                                    id="librarianContact"
+                                    name="contact"
+                                    th:field="*{contact}"
+                                    th:value="${librarianDTO.contact}"
+                                    th:classappend="${#fields.hasErrors('contact') ? 'is-invalid' : ''}"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackLibrarianContact"
+                            >
+                            <span id="contactMessage" style="color: red"></span>
+                            <div
+                                    th:each="e : ${#fields.errors('contact')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackLibrarianContact"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--librarian image div....-->
+                        <div class="mb-3">
+                            <label for="librarianImage" class="form-label">Book's Image</label>
+                            <input
+                                    type="file"
+                                    id="librarianImage"
+                                    name="librarianImage"
+                                    accept="image/*"
+                                    th:value="${librarianDTO.image}"
+                                    th:classappend="${#fields.hasErrors('contact') ? 'is-invalid' : ''}"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackLibrarianImage"
+                            >
+                            <span id="imageMessage" style="color: red"></span>
+                            <div
+                                    th:each="e : ${#fields.errors('image')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackLibrarianImage"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--librarian password div....-->
+                        <div class="mb-3">
+                            <label for="librarianPassword" class="form-label">Librarian Password</label>
+                            <input
+                                    type="password"
+                                    id="librarianPassword"
+                                    th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackLibrarianPassword"
+                            >
+                            <span id="passwordMessage" style="color: red"></span>
+                            <div
+                                    th:each="e : ${#fields.errors('password')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackLibrarianPassword"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--librarian confirm password div....-->
+                        <div class="mb-3">
+                            <label for="librarianConfirmPassword" class="form-label">Librarian's Confirm
+                                Password</label>
+                            <input
+                                    type="password"
+                                    id="librarianConfirmPassword"
+                                    name="password"
+                                    th:field="*{password}"
+                                    th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackLibrarianConfirmPassword"
+                            >
+                            <span id="confirmPasswordMessage" style="color: red"></span>
+                            <div
+                                    th:each="e : ${#fields.errors('password')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackLibrarianConfirmPassword"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--librarian reset & submit div....-->
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                    <!--librarian form div finished....-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

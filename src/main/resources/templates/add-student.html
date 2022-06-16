@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>ICT - Library Management System</title>
+</head>
+<body>
+
+<section>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-6 container justify-content-center card">
+                <h1 class="text-center"> Add New Student </h1>
+                <div>
+                    <p th:text="${message}" style="color: #318043"></p>
+                </div>
+                <div class="card-body">
+
+                    <!--student form started....-->
+                    <form th:action="@{/student/save}" th:object="${studentDTO}" method="post"
+                          enctype="multipart/form-data" onsubmit="return studentFormValidator()">
+
+                        <!--student id div....-->
+                        <div class="mb-3">
+                            <label for="studentId" class="form-label">Student's Id [IT******]</label>
+                            <input
+                                    type="text"
+                                    id="studentId"
+                                    name="studentId"
+                                    th:field="*{studentId}"
+                                    th:value="${studentDTO.studentId}"
+                                    th:classappend="${#fields.hasErrors('studentId') ? 'is-invalid' : ''}"
+                                    required="required"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackStudentId"
+                            >
+                            <span id="idMessage" style="color: red"></span>
+                            <div
+                                    th:each="e : ${#fields.errors('studentId')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackStudentId"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--student name div....-->
+                        <div class="mb-3">
+                            <label for="studentName" class="form-label">Student's Name</label>
+                            <input
+                                    type="text"
+                                    id="studentName"
+                                    name="name"
+                                    th:field="*{name}"
+                                    th:value="${studentDTO.name}"
+                                    th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+                                    required="required"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackStudentName"
+                            >
+                            <div
+                                    th:each="e : ${#fields.errors('name')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackStudentName"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--student email div....-->
+                        <div class="mb-3">
+                            <label for="studentEmail" class="form-label">Student's Email [it*****@mbstu.ac.bd]</label>
+                            <input
+                                    type="email"
+                                    id="studentEmail"
+                                    name="email"
+                                    th:field="*{email}"
+                                    th:value="${studentDTO.email}"
+                                    th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
+                                    required="required"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackStudentEmail"
+                            >
+                            <span id="emailMessage" style="color: red"></span>
+                            <div
+                                    th:each="e : ${#fields.errors('email')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackStudentEmail"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--student contact number div....-->
+                        <div class="mb-3">
+                            <label for="studentContact" class="form-label">Student Contact Number</label>
+                            <input
+                                    type="text"
+                                    id="studentContact"
+                                    name="contact"
+                                    th:field="*{contact}"
+                                    th:value="${studentDTO.contact}"
+                                    required="required"
+                                    class="form-control"
+                                    aria-describedby="emailHelp"
+                            >
+                            <span id="contactMessage" style="color: red"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentSession" class="form-label">Student's Session [20**-**]</label>
+                            <input
+                                    type="text"
+                                    id="studentSession"
+                                    name="session"
+                                    th:field="*{session}"
+                                    th:value="${studentDTO.session}"
+                                    required="required"
+                                    class="form-control"
+                                    aria-describedby="emailHelp"
+                            >
+                            <span id="sessionMessage" style="color: red"></span>
+                        </div>
+
+                        <!--student image div....-->
+                        <div class="mb-3">
+                            <label for="studentImage" class="form-label">Book's Image</label>
+                            <input
+                                    type="file"
+                                    id="studentImage"
+                                    name="studentImage"
+                                    accept="image/*"
+                                    th:value="${studentDTO.image}"
+                                    required="required"
+                                    class="form-control"
+                                    aria-describedby="emailHelp">
+                        </div>
+
+                        <!--student password div....-->
+                        <div class="mb-3">
+                            <label for="studentPassword" class="form-label">Student's Password</label>
+                            <input
+                                    type="password"
+                                    id="studentPassword"
+                                    class="form-control"
+                                    th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                                    aria-describedby="validationServer03FeedbackLibrarianPassword"
+                            >
+                            <span id="passwordMessage" style="color: red"></span>
+                            <div
+                                    th:each="e : ${#fields.errors('password')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackLibrarianPassword"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--student confirm password div....-->
+                        <div class="mb-3">
+                            <label for="studentConfirmPassword" class="form-label">Student's Confirm Password</label>
+                            <input
+                                    type="password"
+                                    id="studentConfirmPassword"
+                                    name="password"
+                                    th:field="*{password}"
+                                    th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackStudentConfirmPassword"
+                            >
+                            <span id="confirmPasswordMessage" style="color: red"></span>
+                            <div
+                                    th:each="e : ${#fields.errors('password')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackLibrarianConfirmPassword"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--student reset & submit div....-->
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                    <!--student form started....-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>ICT - Library Management System</title>
+</head>
+<body>
+
+<section>
+    <div class="container">
+        <div class="container col-md-5" style="text-align: center">
+
+            <h1 style="text-align: center">Book Details</h1>
+
+            <div class="card" style="width: 40rem; text-align: center">
+                <img th:src="@{${'/book/image/' + bookDTO.image}}" class="card-img-top" alt="Not Available Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${'Name of Book: ' + bookDTO.name}">Card title</h5>
+                    <p class="card-text" th:text="${'Name of Book Author: ' + bookDTO.author}"></p>
+                    <a th:href="@{${'/book/edit/' + bookDTO.id}}" class="btn btn-primary">Update Book</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

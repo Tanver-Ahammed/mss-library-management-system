@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>ICT - Library Management System</title>
+</head>
+<body>
+
+<section>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-6 container justify-content-center card">
+                <h1 class="text-center"> Update The Book </h1>
+                <div class="card-body">
+
+                    <!--book form started....-->
+                    <form th:action="@{${'/book/update/' + bookDTO.id}}" th:object="${bookDTO}" method="post"
+                          enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label for="bookName" class="form-label">Book's Name</label>
+                            <input
+                                    type="text"
+                                    id="bookName"
+                                    name="name"
+                                    th:field="*{name}"
+                                    th:value="${bookDTO.name}"
+                                    th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+                                    required="required"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackBookName"
+                            >
+                            <div
+                                    th:each="e : ${#fields.errors('name')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackBookName"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--book author name div....-->
+                        <div class="mb-3">
+                            <label for="bookAuthor" class="form-label">Book's Author Name</label>
+                            <input
+                                    type="text"
+                                    id="bookAuthor"
+                                    name="author"
+                                    th:field="*{author}"
+                                    th:value="${bookDTO.author}"
+                                    th:classappend="${#fields.hasErrors('author') ? 'is-invalid' : ''}"
+                                    required="required"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackBookAuthorName"
+                            >
+                            <div
+                                    th:each="e : ${#fields.errors('author')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackBookAuthorName"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--total book number div....-->
+                        <div class="mb-3">
+                            <label for="numberOfTotalBooks" class="form-label">Number Of Total Books</label>
+                            <input
+                                    type="number"
+                                    id="numberOfTotalBooks"
+                                    name="total"
+                                    min="1"
+                                    th:field="*{total}"
+                                    th:value="${bookDTO.total}"
+                                    th:classappend="${#fields.hasErrors('total') ? 'is-invalid' : ''}"
+                                    required="required"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackTotalBooks"
+                            >
+                            <div
+                                    th:each="e : ${#fields.errors('total')}"
+                                    th:text="${e}"
+                                    id="validationServer03FeedbackTotalBooks"
+                                    class="invalid-feedback">
+                            </div>
+                        </div>
+
+                        <!--book image div....-->
+                        <div class="mb-3">
+                            <label for="bookImage" class="form-label">Book's Image</label>
+                            <input
+                                    type="file"
+                                    id="bookImage"
+                                    name="bookImage"
+                                    accept="image/*"
+                                    class="form-control"
+                                    aria-describedby="validationServer03FeedbackBookImage">
+                        </div>
+
+                        <!--book reset & submit div....-->
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </form>
+                    <!--book form finished....-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

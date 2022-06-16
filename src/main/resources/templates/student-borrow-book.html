@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>ICT - Library Management System</title>
+</head>
+<body>
+
+<section>
+
+    <div class="container">
+        <div class="container">
+            <h1 th:text="${studentDTO.name + ' Borrowed Book'}"></h1>
+        </div>
+        <hr>
+        <br>
+        <div class="row row-cols-3">
+            <div th:if="${bookDTOS.isEmpty()}">
+                <td colspan="3"> No records</td>
+            </div>
+            <div th:each="bookDTO : ${bookDTOS}">
+                <div class="card" style="width: 18rem; height: 25rem;">
+                    <img th:src="@{${'/book/image/' + bookDTO.image}}" height="250" width="150"
+                         class="card-img-top" alt="Not Available Image">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${bookDTO.name}"></h5>
+                        <p class="card-text" th:text="${bookDTO.author}"></p>
+                        <a th:href="@{${'/borrow/student/' + studentDTO.id + '/book/' + bookDTO.id}}"
+                           class="btn btn-success">Borrowed Book</a>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+    </div>
+</section>
+
+</body>
+</html>
