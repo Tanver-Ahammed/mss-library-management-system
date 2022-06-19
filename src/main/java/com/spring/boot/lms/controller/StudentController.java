@@ -35,8 +35,7 @@ public class StudentController {
     @GetMapping(path = "/add")
     public String addStudent(Model model) {
         model.addAttribute("studentDTO", new StudentDTO());
-//        model.addAttribute("message", "You have Registered Successfully...\n" +
-//                "Please, Check your Email and verify your account");
+        model.addAttribute("message", "");
         return "add-student";
     }
 
@@ -52,7 +51,7 @@ public class StudentController {
         model.addAttribute("studentDTO", new StudentDTO());
         model.addAttribute("message", "You have Registered Successfully...\n" +
                 "Please, Check your Email and verify your account");
-        return "redirect:/student/add";
+        return "add-student";
     }
 
     @GetMapping(path = "/verify/{id}/{verifyCode}")

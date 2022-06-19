@@ -40,6 +40,7 @@ public class BookController {
         return "add-book";
     }
 
+    // add book
     @PostMapping("/save")
     public String saveBook(@Valid @ModelAttribute(value = "bookDTO") BookDTO bookDTO, BindingResult result,
                            @RequestParam(value = "bookImage", required = false) MultipartFile bookImage,
